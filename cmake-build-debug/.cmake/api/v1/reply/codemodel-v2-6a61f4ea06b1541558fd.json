@@ -15,7 +15,8 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -30,7 +31,8 @@
 					"name" : "snake",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -41,6 +43,13 @@
 					"id" : "snake::@6890427a1f51a3e7e1df",
 					"jsonFile" : "target-snake-Debug-e1ee3ca4e195a3684f7f.json",
 					"name" : "snake",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "snake2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-snake2-Debug-fe63a80ec35aeb9fac8e.json",
+					"name" : "snake2",
 					"projectIndex" : 0
 				}
 			]
