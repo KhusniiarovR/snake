@@ -1,10 +1,12 @@
 #include <iostream>
-#include <cstdlib>
+#include <random>
 using namespace std;
 int main() {
     int a,b;
-    srand((unsigned) time(nullptr));
     int snake_length = 5;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distr(1, 1000000000);
     cin >> a >> b;
     int size[a][b];
     for (int i = 0; i < a; i++) {
@@ -12,8 +14,8 @@ int main() {
             size[i][j] = 0;
         }
     }
-    int new_x = rand() % (a-1);
-    int new_y = rand() % (b-1);
+    int new_x = distr(gen) % (a-1);
+    int new_y = distr(gen) % (b-1);
     size[new_x][new_y] = 999;
     for (int i = 0; i < a; i++) {
         for (int j = 0; j < b; j++) {
@@ -26,61 +28,64 @@ int main() {
     char move = 'q';
     while (move != 'z') {
         cin >> move;
+        cout << "\tYour length: " << snake_length << endl;
         switch (move) {
             case 'a':
                 y -= 1;
             if (size[x][y] == 999) {
                 snake_length += 1;
-                new_x = rand() % (a-1);
-                new_y = rand() % (b-1);
+                new_x = distr(gen) % a;
+                new_y = distr(gen) % b;
                 while(size[new_x][new_y] != 0) {
-                    new_x = rand() % (a-1);
-                    new_y = rand() % (b-1);
+                    new_x = distr(gen) % a;
+                    new_y = distr(gen) % b;
                 }
                 size[new_x][new_y] = 999;
             }
-            else if (size[x][y] != 0) {move = 'z';}break;
+            else if (size[x][y] != 0) {move = 'z';cout << "GAME OVER\n";}break;
             case 'w':
                 x -= 1;
             if (size[x][y] == 999) {
                 snake_length += 1;
-                new_x = rand() % (a-1);
-                new_y = rand() % (b-1);
+                new_x = distr(gen) % a;
+                new_y = distr(gen) % b;
                 while(size[new_x][new_y] != 0) {
-                    new_x = rand() % (a-1);
-                    new_y = rand() % (b-1);
+                    new_x = distr(gen) % a;
+                    new_y = distr(gen) % b;
                 }
                 size[new_x][new_y] = 999;
             }
-            else if (size[x][y] != 0) {move = 'z';}break;
+            else if (size[x][y] != 0) {move = 'z';cout << "GAME OVER\n";}break;
             case 's':
                 x += 1;
             if (size[x][y] == 999) {
                 snake_length += 1;
-                new_x = rand() % (a-1);
-                new_y = rand() % (b-1);
+                new_x = distr(gen) % a;
+                new_y = distr(gen) % b;
                 while(size[new_x][new_y] != 0) {
-                    new_x = rand() % (a-1);
-                    new_y = rand() % (b-1);
+                    new_x = distr(gen) % a;
+                    new_y = distr(gen) % b;
                 }
                 size[new_x][new_y] = 999;
             }
-            else if (size[x][y] != 0) {move = 'z';}break;
+            else if (size[x][y] != 0) {move = 'z';cout << "GAME OVER\n";}break;
             case 'd':
                 y += 1;
             if (size[x][y] == 999) {
                 snake_length += 1;
-                new_x = rand() % (a-1);
-                new_y = rand() % (b-1);
+                new_x = distr(gen) % a;
+                new_y = distr(gen) % b;
                 while(size[new_x][new_y] != 0) {
-                    new_x = rand() % (a-1);
-                    new_y = rand() % (b-1);
+                    new_x = distr(gen) % a;
+                    new_y = distr(gen) % b;
                 }
                 size[new_x][new_y] = 999;
             }
-            else if (size[x][y] != 0) {move = 'z';}break;
+            else if (size[x][y] != 0) {move = 'z';cout << "GAME OVER\n";}break;
             default:cout << move << "?\n";break;
         }
+        if (snake_length == a*b){move = 'z';cout << "You win\n";break;}
+        else if (move == 'z'){break;}
         for (int i = 0; i < a; i++) {
             for (int j = 0; j < b; j++) {
                 if (size[i][j] != 0 && size[i][j] != 999) {
@@ -93,6 +98,5 @@ int main() {
             cout << endl;
         }
     }
-    cout << "GAME OVER\n";
     return 0;
 }
